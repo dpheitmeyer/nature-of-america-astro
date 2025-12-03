@@ -9,14 +9,15 @@ const markers = panes.map((p) => {
         lat: p.data.lat,
         lon: p.data.lon,
         title: p.data.title,
-        imgSrc: `/images/panes/sn${p.data.sn}.png`
+        imgSrc: `/images/panes/sn${p.data.sn}.png`,
+        id: p.id
     }
 })
 console.log(markers);
 ---
 
 <Layout pageTitle="First Issue Map">
-<p>Here is a map</p>
+<p>Locations of stamps' first issue.</p>
     <div id="map">
       <!-- map goes here -->
     </div>
@@ -58,7 +59,7 @@ mapMarkers.forEach((m)=> {
     allLats.push(m.lat);
     allLons.push(m.lon);
     let mapMarker = L.marker([m.lat, m.lon]).addTo(map);
-    mapMarker.bindPopup(`<div class="marker-popup"><strong>${m.title}</strong><br/><img src="${m.imgSrc}" /></div>`);
+    mapMarker.bindPopup(`<a href="/panes/${m.id}/"><div class="marker-popup"><strong>${m.title}</strong><br/><img src="${m.imgSrc}" /></div></a>`);
 })
 console.log(allLats);
 const swCorner = [Math.min(...allLats) - 1, Math.min(...allLons) - 1 ];

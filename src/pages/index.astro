@@ -6,7 +6,6 @@ import { type CollectionEntry, getCollection, render } from "astro:content";
 const panes = (await getCollection("panes")).sort(
   (a, b) => a.data.year - b.data.year
 );
-console.log(generateWidths(600, 400));
 ---
 
 <Layout pageTitle="Stamp Panes in Nature of America Series">
@@ -18,9 +17,8 @@ console.log(generateWidths(600, 400));
             <div class="pane">
               <img src={`/images/panes/sn${p.data.sn}.png`} />
               <div class="title">{p.data.title}</div>
-               <div class="place">{p.data.place}</div>
-                            <div class="year">{p.data.year}</div>
-
+              <div class="place">{p.data.place}</div>
+              <div class="year">{p.data.year}</div>
             </div>
           </a>
         );
@@ -29,15 +27,36 @@ console.log(generateWidths(600, 400));
   </div>
 </Layout>
 <style>
-  .pane img { margin-block-end: 0.5rem;}
+  .pane img {
+    margin-block-end: 0.5rem;
+  }
   .panes {
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }
   .pane {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-areas:
+      "img    img"
+      "title  title"
+      "place  year";
     border: thin solid gray;
     padding: 0.5rem;
+  }
+  .pane img {
+    grid-area: img;
+  }
+  .pane .title {
+    grid-area: title;
+  }
+  .pane .place {
+    grid-area: place;
+  }
+  .pane .year {
+    grid-area: year;
+    justify-self: end;
   }
   .panes a {
     &:link,
@@ -48,5 +67,7 @@ console.log(generateWidths(600, 400));
       text-decoration: none;
     }
   }
-  .title { font-weight: bold;}
+  .title {
+    font-weight: bold;
+  }
 </style>

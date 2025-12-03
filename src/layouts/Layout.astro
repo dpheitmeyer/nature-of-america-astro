@@ -1,6 +1,8 @@
 ---
 const siteTitle = "Nature of America";
-import Navigation from '@/layouts/Navigation.astro';
+import Navigation from '@/components/Navigation.astro';
+const pageTitle = Astro.props.pageTitle;
+let htmlTitle = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle;
 ---
 
 <!doctype html>
@@ -9,7 +11,7 @@ import Navigation from '@/layouts/Navigation.astro';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>{siteTitle}</title>
+    <title>{htmlTitle}</title>
     <meta name="description" content="" />
 
     <meta property="og:title" content="" />
@@ -178,6 +180,9 @@ import Navigation from '@/layouts/Navigation.astro';
 
   header {
     margin-bottom: 1rem;
+    display: grid;
+    grid-template-areas:  "site-title nav"
+                          "page-title page-title";
   }
 
   header .site-title {
@@ -197,7 +202,7 @@ import Navigation from '@/layouts/Navigation.astro';
   header nav {
     grid-area: nav;
     justify-self: end;
-    align-self: center;
+    align-self: end;
   }
 
   main p {
@@ -375,133 +380,5 @@ import Navigation from '@/layouts/Navigation.astro';
       page-break-after: avoid;
     }
   }
-
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-        font-weight: 400;
-    font-size: 1.25rem;
-}
-nav > ul {
-  display: flex;
-}
-
-header nav ul li a {
-    display: block;
-    padding: .5rem 1rem
-}
-
-header nav ul li ul li {
-    display: block;
-    text-align: left;
-    width: 100%
-}
-
-header nav ul li ul li a {
-    width: 100%
-}
-
-
-
-
-
-
-
-header nav>ul>li {
-    text-align: center
-}
-
-header nav a {
-    display: block
-}
-
-header nav.open {
-    background-image: url(../images/icons/x-menu.svg);
-    background-size: 26px;
-    background-position: center right 3spx
-}
-
-header nav.open>ul {
-    margin-top: 32px
-}
-
-header nav.open ul {
-    display: block;
-    z-index: 9999;
-    position: absolute;
-    left: 0
-}
-
-header nav.open ul li {
-    text-align: left
-}
-
-header nav.open ul li ul {
-    display: block;
-    position: relative
-}
-
-nav ul,
-nav ul li,
-nav ul li a {
-    width: 100%
-}
-
-header nav ul li ul li a,
-header nav.open ul li ul li a {
-    padding-left: 2em
-}
-
-header nav ul li ul {
-    display: block
-}
-
-header nav ul li a,
-header nav ul li a:active,
-header nav ul li a:hover,
-header nav ul li a:link,
-header nav ul li a:visited {
-    color: var(--main-white);
-    background-color: var(--navigation-bg-color);
-    text-decoration: none;
-    border-bottom: 5px solid var(--navigation-bg-color)
-}
-
-header nav ul li a:hover {
-    background-color: var(--nav-hover-light);
-    color: var(--nav-hover-dark);
-    border-bottom: 5px solid var(--nav-hover-light)
-}
-
-header nav ul li a:active {
-    border-bottom-color: var(--navigation-here-bg-color);
-    color: var(--navigation-here-bg-color);
-    background-color: var(--main-white)
-}
-
-header nav ul li.iamhere>a,
-header nav ul li.iamhere>a:active,
-header nav ul li.iamhere>a:hover,
-header nav ul li.iamhere>a:link,
-header nav ul li.iamhere>a:visited {
-    background-color: var(--navigation-here-bg-color);
-    color: var(--navigation-here-color);
-    border-bottom: 5px solid var(--navigation-border);
-    cursor: default
-}
-
-header nav ul li.iamhere ul li.iamhere a,
-header nav ul li.iamhere ul li.iamhere a:active,
-header nav ul li.iamhere ul li.iamhere a:hover,
-header nav ul li.iamhere ul li.iamhere a:link,
-header nav ul li.iamhere ul li.iamhere a:visited {
-    border-bottom-style: none;
-    cursor: default;
-    background-color: var(--navigation-here-color);
-    color: var(--navigation-here-bg-color);
-    border-bottom-color: var(--navigation-here-color)
-}
 
 </style>

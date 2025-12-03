@@ -1,0 +1,34 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+
+const panes = (await getCollection("panes")).sort(
+  (a, b) => a.data.year - b.data.year
+);
+---
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li>
+      <a href="/">Stamp Panes</a>
+      <ul class="visually-hidden">
+        {
+          panes.map((p) => {
+            return (
+              <li>
+                <a href={`/panes/${p.id}/`}>{p.data.title}</a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </li>
+    <li><a href="/map/">First Issue Map</a></li>
+  </ul>
+</nav>
+<style>
+    nav>ul { list-style: none; display: flex; }
+    nav>ul a { display: block; padding: 0.5rem;}
+    nav ul ul { display: none; list-style: none; margin: 0; padding: 0;}
+    nav ul ul a { display:block; padding: 0.5rem; border: thin solid black;}
+    nav>ul>li:hover ul { display: block; }
+</style>

@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import Resources from "@/layouts/Resources.astro";
+import Resources from "@/components/Resources.astro";
 import { getCollection } from "astro:content";
 import { render } from "astro:content";
 
@@ -30,6 +30,7 @@ console.log(pane);
       <Content />
     </div>
   </div>
+  <h3>Individual Stamps in Pane</h3>
   <div class="individual-stamps">
     {
       pane.data.stamps?.map((s) => {
@@ -68,6 +69,7 @@ console.log(pane);
   .scientific-name {
     font-style: italic;
   }
+  .species p { margin-block-start: 0; margin-block-bottom: 3rem;}
   @media screen and (min-width: 900px) {
     div.side-by-side {
       display: grid;
