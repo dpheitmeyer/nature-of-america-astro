@@ -1,0 +1,70 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from 'astro:content'
+import 'leaflet/dist/leaflet.css';
+
+const panes = await getCollection('panes');
+const markers = panes.map((p) => {
+    return {
+        lat: p.data.lat,
+        lon: p.data.lon,
+        title: p.data.title,
+        imgSrc: `/images/panes/sn${p.data.sn}.png`
+    }
+})
+console.log(markers);
+---
+
+<Layout pageTitle="First Issue Map">
+<p>Here is a map</p>
+    <div id="map">
+      <!-- map goes here -->
+    </div>
+</Layout>
+
+<!-- Pass data to the client -->
+<script define:vars={{markers}}>
+  // markers is now available in the client-side script
+  window.mapMarkers = markers;
+</script>
+
+<script>
+import L from 'leaflet';
+import icon from 'leaflet/dist/images/marker-icon.png';
+import icon2x from 'leaflet/dist/images/marker-icon-2x.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+
+console.log(icon);
+// Set up the default icon
+let DefaultIcon = L.icon({
+  iconUrl: icon.src,
+  iconRetinaUrl: icon2x.src,
+  shadowUrl: iconShadow.src,
+  iconSize: [25, 41],
+  iconAnchor: [12,41]
+});
+L.Marker.prototype.options.icon = DefaultIcon;
+
+const map = L.map('map').setView([42.3745,-91.1172], 5);
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+const allLats = [];
+const allLons = [];
+
+mapMarkers.forEach((m)=> {
+    allLats.push(m.lat);
+    allLons.push(m.lon);
+    let mapMarker = L.marker([m.lat, m.lon]).addTo(map);
+    mapMarker.bindPopup(`<div class="marker-popup"><strong>${m.title}</strong><br/><img src="${m.imgSrc}" /></div>`);
+})
+console.log(allLats);
+const swCorner = [Math.min(...allLats) - 1, Math.min(...allLons) - 1 ];
+const neCorner = [Math.max(...allLats) + 1, Math.max(...allLons) + 1 ];
+map.fitBounds([swCorner, neCorner])
+</script>
+<style>
+    #map { height: 70vh;}
+</style>

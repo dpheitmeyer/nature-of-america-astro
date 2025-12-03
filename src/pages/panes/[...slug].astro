@@ -1,0 +1,87 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Resources from "@/layouts/Resources.astro";
+import { getCollection } from "astro:content";
+import { render } from "astro:content";
+
+export async function getStaticPaths() {
+  const panes = await getCollection("panes");
+  return Promise.all(
+    panes.map(async (pane) => {
+      const { Content } = await render(pane);
+      return {
+        params: { slug: pane.id },
+        props: { pane, Content },
+      };
+    })
+  );
+}
+
+const { pane, Content } = Astro.props;
+console.log(pane);
+---
+
+<Layout pageTitle={pane.data.title}>
+  <div class="side-by-side">
+    <div class="pane-image">
+      <img src={`/images/panes/sn${pane.data.sn}.png`} />
+    </div>
+    <div class="content">
+      <Content />
+    </div>
+  </div>
+  <div class="individual-stamps">
+    {
+      pane.data.stamps?.map((s) => {
+        return <img src={`/images/panes/${s}`} />;
+      })
+    }
+  </div>
+  <h3>Stamp Pane Back</h3>
+  <div class="side-by-side">
+  <div class="paneimageback">
+    <img
+      src={`/images/panes/sn${pane.data.sn}-b.png`}
+      alt={`Back of pane of stamps for ${pane.data.title}`}
+    />
+  </div>
+  <div><!-- empty column --></div>
+  </div>
+
+  <h3>Flora and Fauna Represented</h3>
+  <div class="species">
+    {
+      pane.data.species?.map((s) => {
+        return (
+          <p>
+            {s.name_common}
+            <br />
+            <span class="scientific-name">{s.name_scientific}</span>
+          </p>
+        );
+      })
+    }
+  </div>
+  {pane.data.resources && <Resources resources={pane.data.resources} />}
+</Layout>
+<style>
+  .scientific-name {
+    font-style: italic;
+  }
+  @media screen and (min-width: 900px) {
+    div.side-by-side {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 2fr 1fr;
+    }
+    .species {
+      column-count: 3;
+    }
+  }
+  .individual-stamps {
+    margin-block-start: 1rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+  }
+</style>

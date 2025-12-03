@@ -1,0 +1,507 @@
+---
+const siteTitle = "Nature of America";
+import Navigation from '@/layouts/Navigation.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{siteTitle}</title>
+    <meta name="description" content="" />
+
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:image:alt" content="" />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icon.png" />
+  </head>
+
+  <body>
+    <header>
+      <div class="site-title">Nature of America</div>
+      <Navigation/>
+      <h1 class="page-title">{Astro.props.pageTitle}</h1>
+    </header>
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      <div class="content">
+        <p>
+          This work is part of CSCI E-12, Fundamentals of Web Application
+          Development, Harvard Extension School
+        </p>
+        <p>
+          Information for this site comes from the
+          <a href="https://about.usps.com/who/profile/"
+            >United States Postal Service</a
+          >, with special thanks to Roy Betts (USPS), and the
+          <a href="https://postalmuseum.si.edu/"
+            >Smithsonian National Postal Museum</a
+          >. Stamp images © United States Postal Service. All rights reserved.<br
+          />Used with permission.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  /*! HTML5 Boilerplate v9.0.1 | MIT License | https://html5boilerplate.com/ */
+
+  /* main.css 3.0.0 | MIT License | https://github.com/h5bp/main.css#readme */
+  /*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+  /* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+  html {
+    color: #222;
+    font-size: 1em;
+    line-height: 1.4;
+  }
+
+  /*
+ * Remove text-shadow in selection highlight:
+ * https://twitter.com/miketaylr/status/12228805301
+ *
+ * Customize the background color to match your design.
+ */
+
+  ::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+  }
+
+  ::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+  }
+
+  /*
+ * A better looking default horizontal rule
+ */
+
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+  }
+
+  /*
+ * Remove the gap between audio, canvas, iframes,
+ * images, videos and the bottom of their containers:
+ * https://github.com/h5bp/html5-boilerplate/issues/440
+ */
+
+  audio,
+  canvas,
+  iframe,
+  img,
+  svg,
+  video {
+    vertical-align: middle;
+  }
+
+  /*
+ * Remove default fieldset styles.
+ */
+
+  fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  /*
+ * Allow only vertical resizing of textareas.
+ */
+
+  textarea {
+    resize: vertical;
+  }
+
+  /* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(238, 219, 195);
+    margin: 0;
+  }
+  header,
+  main,
+  footer div.content {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  a:link,
+  a:hover,
+  a:visited,
+  a:active {
+    color: blue;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  footer {
+    background-color: #ddd;
+    font-size: smaller;
+    padding: 1rem;
+    margin-top: 5rem;
+    border-top: 2px solid black;
+  }
+
+  header {
+    margin-bottom: 1rem;
+  }
+
+  header .site-title {
+    grid-area: site-title;
+    margin: 0;
+    padding-top: 1rem;
+    font-size: min(7vw, 6rem);
+  }
+
+  header .page-title {
+    grid-area: page-title;
+    margin: 0;
+    font-size: 3vw;
+    padding-top: 0.5rem;
+  }
+
+  header nav {
+    grid-area: nav;
+    justify-self: end;
+    align-self: center;
+  }
+
+  main p {
+    line-height: 1.5;
+  }
+  h3 {
+    margin-top: 4rem;
+  }
+  @media screen and (min-width: 1750px) {
+    header,
+    main,
+    footer div.content {
+      max-width: 1560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  /* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+  /*
+ * Hide visually and from screen readers
+ */
+
+  .hidden,
+  [hidden] {
+    display: none !important;
+  }
+
+  /*
+ * Hide only visually, but have it available for screen readers:
+ * https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ *
+ * 1. For long content, line feeds are not interpreted as spaces and small width
+ *    causes content to wrap 1 word per line:
+ *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+ */
+
+  .visually-hidden {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    /* 1 */
+  }
+
+  /*
+ * Extends the .visually-hidden class to allow the element
+ * to be focusable when navigated to via the keyboard:
+ * https://www.drupal.org/node/897638
+ */
+
+  .visually-hidden.focusable:active,
+  .visually-hidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    white-space: inherit;
+    width: auto;
+  }
+
+  /*
+ * Hide visually and from screen readers, but maintain layout
+ */
+
+  .invisible {
+    visibility: hidden;
+  }
+
+  /*
+ * Clearfix: contain floats
+ *
+ * The use of `table` rather than `block` is only necessary if using
+ * `::before` to contain the top-margins of child elements.
+ */
+
+  .clearfix::before,
+  .clearfix::after {
+    content: "";
+    display: table;
+  }
+
+  .clearfix::after {
+    clear: both;
+  }
+
+  /* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+  @media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+  }
+
+  @media print,
+    (-webkit-min-device-pixel-ratio: 1.25),
+    (min-resolution: 1.25dppx),
+    (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+  }
+
+  /* ==========================================================================
+   Print styles.
+   Inlined to avoid the additional HTTP request:
+   https://www.phpied.com/delay-loading-your-print-css/
+   ========================================================================== */
+
+  @media print {
+    *,
+    *::before,
+    *::after {
+      background: #fff !important;
+      color: #000 !important;
+      /* Black prints faster */
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+      text-decoration: underline;
+    }
+
+    a[href]::after {
+      content: " (" attr(href) ")";
+    }
+
+    abbr[title]::after {
+      content: " (" attr(title) ")";
+    }
+
+    /*
+   * Don't show links that are fragment identifiers,
+   * or use the `javascript:` pseudo protocol
+   */
+    a[href^="#"]::after,
+    a[href^="javascript:"]::after {
+      content: "";
+    }
+
+    pre {
+      white-space: pre-wrap !important;
+    }
+
+    pre,
+    blockquote {
+      border: 1px solid #999;
+      page-break-inside: avoid;
+    }
+
+    tr,
+    img {
+      page-break-inside: avoid;
+    }
+
+    p,
+    h2,
+    h3 {
+      orphans: 3;
+      widows: 3;
+    }
+
+    h2,
+    h3 {
+      page-break-after: avoid;
+    }
+  }
+
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+        font-weight: 400;
+    font-size: 1.25rem;
+}
+nav > ul {
+  display: flex;
+}
+
+header nav ul li a {
+    display: block;
+    padding: .5rem 1rem
+}
+
+header nav ul li ul li {
+    display: block;
+    text-align: left;
+    width: 100%
+}
+
+header nav ul li ul li a {
+    width: 100%
+}
+
+
+
+
+
+
+
+header nav>ul>li {
+    text-align: center
+}
+
+header nav a {
+    display: block
+}
+
+header nav.open {
+    background-image: url(../images/icons/x-menu.svg);
+    background-size: 26px;
+    background-position: center right 3spx
+}
+
+header nav.open>ul {
+    margin-top: 32px
+}
+
+header nav.open ul {
+    display: block;
+    z-index: 9999;
+    position: absolute;
+    left: 0
+}
+
+header nav.open ul li {
+    text-align: left
+}
+
+header nav.open ul li ul {
+    display: block;
+    position: relative
+}
+
+nav ul,
+nav ul li,
+nav ul li a {
+    width: 100%
+}
+
+header nav ul li ul li a,
+header nav.open ul li ul li a {
+    padding-left: 2em
+}
+
+header nav ul li ul {
+    display: block
+}
+
+header nav ul li a,
+header nav ul li a:active,
+header nav ul li a:hover,
+header nav ul li a:link,
+header nav ul li a:visited {
+    color: var(--main-white);
+    background-color: var(--navigation-bg-color);
+    text-decoration: none;
+    border-bottom: 5px solid var(--navigation-bg-color)
+}
+
+header nav ul li a:hover {
+    background-color: var(--nav-hover-light);
+    color: var(--nav-hover-dark);
+    border-bottom: 5px solid var(--nav-hover-light)
+}
+
+header nav ul li a:active {
+    border-bottom-color: var(--navigation-here-bg-color);
+    color: var(--navigation-here-bg-color);
+    background-color: var(--main-white)
+}
+
+header nav ul li.iamhere>a,
+header nav ul li.iamhere>a:active,
+header nav ul li.iamhere>a:hover,
+header nav ul li.iamhere>a:link,
+header nav ul li.iamhere>a:visited {
+    background-color: var(--navigation-here-bg-color);
+    color: var(--navigation-here-color);
+    border-bottom: 5px solid var(--navigation-border);
+    cursor: default
+}
+
+header nav ul li.iamhere ul li.iamhere a,
+header nav ul li.iamhere ul li.iamhere a:active,
+header nav ul li.iamhere ul li.iamhere a:hover,
+header nav ul li.iamhere ul li.iamhere a:link,
+header nav ul li.iamhere ul li.iamhere a:visited {
+    border-bottom-style: none;
+    cursor: default;
+    background-color: var(--navigation-here-color);
+    color: var(--navigation-here-bg-color);
+    border-bottom-color: var(--navigation-here-color)
+}
+
+</style>

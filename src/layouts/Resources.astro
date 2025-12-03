@@ -1,0 +1,28 @@
+---
+const resources = Astro.props.resources;
+---
+
+<h3>Resources</h3>
+<ul class="resources">
+  {
+    resources.map((r) => {
+      return (
+        <li>
+          <a href={r.url}>{r.title}</a>
+          {r.description && (
+            <>
+              <br />
+              {r.description}
+            </>
+          )}
+        </li>
+      );
+    })
+  }
+</ul>
+<style>
+  .resources li {
+    margin-block-start: 0.5rem;
+    line-height: 1.5;
+  }
+</style>
