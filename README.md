@@ -4,9 +4,11 @@ David's Final Project - "Nature of America Stamp Series".  This site highlights 
 ## TODO 
 
 - [ ] general code cleanup
+- [ ] helper function to get sorted panes collection
+- [ ] basic site tests
+- [ ] lighthouse baseline test and any improvements
 - [ ] should map be Vue?
 - [ ] should responsive images be throughout?
-- [ ] helper function to get sorted panes collection
 
 ## Installation and Running
 
