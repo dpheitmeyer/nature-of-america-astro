@@ -70,3 +70,4 @@ The map of the first issue locations is done through LeafletJS and data from the
 ![low-fi skeleton of map page](./__readme_resources/skeleton-2.png)
 ### Surface
 See site.
+![screenshot of project home page](./__readme_resources/nature-of-america-home.png)
