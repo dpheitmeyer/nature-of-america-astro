@@ -1,0 +1,32 @@
+name: Deploy to Dreamhost
+on:
+  push:
+    branches:
+      - main  
+  workflow_dispatch: # Allows manual triggering
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22 # Or your preferred Node.js version
+          cache: 'npm' # Or 'yarn' or 'pnpm'
+      - name: Install dependencies
+        run: npm install # Or yarn install, pnpm install
+      - name: Build Astro project
+        run: npm run build # Or yarn build, pnpm build
+      - name: Deploy with rsync
+        uses: burnett01/rsync-deployments@6.0.0
+        with:
+          switches: -avzr
+          path: dist/
+          remote_path: /home/dh_hj8he5/project.dph445.students.cs12.net/
+          remote_host: ${{ secrets.HOST }}
+          remote_user: ${{ secrets.USERNAME }}
+          remote_key:  ${{ secrets.SSH_PRIVATE_KEY }}

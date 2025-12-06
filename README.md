@@ -3,6 +3,8 @@ David's Final Project - "Nature of America Stamp Series".  This site highlights 
 
 ## TODO 
 
+- [ ] add lessons learned
+- [ ] deploy to project subdomain on dreamhost with github actions
 - [ ] general code cleanup
 - [ ] helper function to get sorted panes collection
 - [ ] basic site tests

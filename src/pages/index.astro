@@ -15,8 +15,8 @@ const panes = (await getCollection("panes")).sort(
         return (
           <a href={`/panes/${p.id}/`}>
             <div class="pane">
-              <img src={`/images/panes/sn${p.data.sn}.png`} />
-              <div class="title">{p.data.title}</div>
+              <img src={`/images/panes/sn${p.data.sn}.png`} /><!-- add alt attribute -->
+<!-- todo: shoudl this be an hx? -->              <div class="title">{p.data.title}</div>
               <div class="place">{p.data.place}</div>
               <div class="year">{p.data.year}</div>
             </div>
