@@ -57,7 +57,36 @@ let htmlTitle = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle;
     </footer>
   </body>
 </html>
-
+<style is:global>
+  /* Playfair Display fonts
+     https://www.fontsquirrel.com/fonts/playfair-display
+     SIL Open Font License v1.10
+  */
+  @font-face {
+    font-family: "PlayfairDisplaySC"; /* Choose a name for your font */
+    src: url("/fonts/PlayfairDisplaySC-Regular.otf") format("opentype"); /* Specify the path to the font file and its format */
+    font-display: "swap";
+    /* Optional: Add font-weight and font-style if you have different variants */
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "PlayfairDisplay"; /* Choose a name for your font */
+    src: url("/fonts/PlayfairDisplay-Regular.otf") format("opentype"); /* Specify the path to the font file and its format */
+    font-display: "swap";
+    /* Optional: Add font-weight and font-style if you have different variants */
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "PlayfairDisplay"; /* Choose a name for your font */
+    src: url("/fonts/PlayfairDisplay-Bold.otf") format("opentype"); /* Specify the path to the font file and its format */
+    font-display: "swap";
+    /* Optional: Add font-weight and font-style if you have different variants */
+    font-weight: bold;
+    font-style: normal;
+  }
+</style>
 <style is:global>
   /*! HTML5 Boilerplate v9.0.1 | MIT License | https://html5boilerplate.com/ */
 
@@ -149,6 +178,15 @@ let htmlTitle = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle;
     background-color: rgb(238, 219, 195);
     margin: 0;
   }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  header .site-title {
+    font-family: "PlayfairDisplaySC", Arial, Helvetica, sans-serif;
+  }
   header,
   main,
   footer div.content {
@@ -221,7 +259,8 @@ let htmlTitle = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle;
   main p {
     line-height: 1.5;
   }
-  h2, h3 {
+  h2,
+  h3 {
     margin-top: 4rem;
   }
 
