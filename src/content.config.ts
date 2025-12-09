@@ -16,6 +16,12 @@ const panes = defineCollection({
     date: z.date(),
     lat: z.number().optional(),
     lon: z.number().optional(),
+    stamps_annotated: z.array(
+      z.object({
+        image: z.string(),
+        title: z.string(),
+      })
+    ).optional(),
     stamps: z.array(z.string()).optional(),
     resources: z.array(z.object({
       url: z.string(),

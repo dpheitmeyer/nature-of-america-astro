@@ -7,6 +7,27 @@ place: Lincoln, Nebraska
 lon: -96.7077751
 lat: 40.8088861
 date: 2001-01-01
+stamps_annotated:
+  - image: npm-2002_2007_657_1z.jpg
+    title: 34c Pronghorns and Canada Geese single
+  - image: npm-2002_2007_657_2z.jpg
+    title: 34c Burrowing Owls and American Buffalos single
+  - image: npm-2002_2007_657_3z.jpg
+    title: 34c American buffalo, Black-tailed Prairie Dogs and Wild Alfalfa
+  - image: npm-2002_2007_657_4z.jpg
+    title: 34c Black-tailed Prairie Dogs and American Buffalo
+  - image: npm-2002_2007_657_5z.jpg
+    title: 34c Painted Lady Butterfly and American Buffalo
+  - image: npm-2002_2007_657_6z.jpg
+    title: 34c Western Meadowlark and Camel Cricket
+  - image: npm-2002_2007_657_7z.jpg
+    title: 34c Badger and Harvester Ants
+  - image: npm-2002_2007_657_8z.jpg
+    title: 34c Eastern Short-horned Lizard and Plains Pocket Gopher
+  - image: npm-2002_2007_657_9z.jpg
+    title: 34c Plains Spadefoot, Dung Beetle and Prairie Roses
+  - image: npm-2002_2007_657_10z.jpg
+    title: 34c Two-striped Grasshopper and Ord's Kangaroo Rat
 stamps:
   - npm-2002_2007_657_1z.jpg
   - npm-2002_2007_657_2z.jpg

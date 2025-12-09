@@ -3,6 +3,10 @@ import Layout from "@/layouts/Layout.astro";
 import Resources from "@/components/Resources.astro";
 import { getCollection } from "astro:content";
 import { render } from "astro:content";
+import { Image } from 'astro:assets';
+import { stampImages } from '@/utils/images.js';
+import { generateWidths } from "@/utils/imageWidths.js";
+
 
 export async function getStaticPaths() {
   const panes = await getCollection("panes");
@@ -18,38 +22,74 @@ export async function getStaticPaths() {
 }
 
 const { pane, Content } = Astro.props;
-console.log(pane);
+
 ---
 
 <Layout pageTitle={pane.data.title}>
   <div class="side-by-side">
     <div class="pane-image">
-      <img src={`/images/panes/sn${pane.data.sn}.png`} />
+      { stampImages[`sn${pane.data.sn}.png`] &&
+      <Image 
+        src={stampImages[`sn${pane.data.sn}.png`]} 
+        alt={`Stamp pane for ${pane.data.title}`}
+        widths={generateWidths(1050,520)}
+        format="webp"
+        sizes="(width < 900px) 90vw, (width < 1750px) 60vw, 520px"
+        layout="constrained"
+      />}
     </div>
     <div class="content">
       <Content />
     </div>
   </div>
-  <h3>Individual Stamps in Pane</h3>
+  <h2>Individual Stamps in Pane</h2>
   <div class="individual-stamps">
     {
-      pane.data.stamps?.map((s) => {
-        return <img src={`/images/panes/${s}`} />;
-      })
+      pane.data.stamps_annotated
+        ? pane.data.stamps_annotated.map((s) => (
+            <figure>
+              <Image 
+                src={stampImages[s.image]} 
+                alt={s.title}
+                widths={generateWidths(500,225)}
+                format="webp"
+                sizes="(max-width:517px) 90vw, (max-width: 785px) calc((90vw - 1rem)/2), (max-width:1052px) calc((90vw - 2rem)/3), (max-width: 1321px) calc((90vw - 3rem)/4), (max-width: 1589px) calc((90vw - 4rem)/5), (max-width: 1749px) calc((90vw - 5rem)/6), 247px"
+                layout="constrained"
+              />
+              <figcaption>{s.title}</figcaption>
+            </figure>
+          ))
+        : pane.data.stamps
+          ? pane.data.stamps.map((s) => 
+              <Image 
+                src={stampImages[s]} 
+                alt="Single stamp from pane"
+                widths={generateWidths(500,225)}
+                format="webp"
+                sizes="(max-width:517px) 90vw, (max-width: 785px) calc((90vw - 1rem)/2), (max-width:1052px) calc((90vw - 2rem)/3), (max-width: 1321px) calc((90vw - 3rem)/4), (max-width: 1589px) calc((90vw - 4rem)/5), (max-width: 1749px) calc((90vw - 5rem)/6), 247px"
+                layout="constrained"
+              />
+            )
+          : null
     }
   </div>
-  <h3>Stamp Pane Back</h3>
+
+  <h2>Stamp Pane Back</h2>
   <div class="side-by-side">
-  <div class="paneimageback">
-    <img
-      src={`/images/panes/sn${pane.data.sn}-b.png`}
-      alt={`Back of pane of stamps for ${pane.data.title}`}
-    />
-  </div>
-  <div><!-- empty column --></div>
+    <div class="paneimageback">
+      <Image 
+        src={stampImages[`sn${pane.data.sn}-b.png`]} 
+        alt={`Back of stamp pane for ${pane.data.title}`}
+        widths={generateWidths(1050,900)}
+        format="webp"
+        sizes="(width < 900px) 90vw, (width < 1750px) 60vw, 1040px"
+        layout="constrained"
+      />
+    </div>
+    <div><!-- empty column so back pane is same size as front pane --></div>
   </div>
 
-  <h3>Flora and Fauna Represented</h3>
+  <h2>Flora and Fauna Represented</h2>
   <div class="species">
     {
       pane.data.species?.map((s) => {
@@ -69,7 +109,26 @@ console.log(pane);
   .scientific-name {
     font-style: italic;
   }
-  .species p { margin-block-start: 0; margin-block-bottom: 3rem;}
+  .species p {
+    margin-block-start: 0;
+    margin-block-end: 1.5rem;
+  }
+  .individual-stamps {
+    margin-block-start: 1rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+  }
+  .individual-stamps figure {
+    margin: 0;
+    padding: 0;
+  }
+  .individual-stamps figcaption {
+    padding: 0.25rem 0.5rem 0 0.5rem;
+  }
+  @media screen and (min-width: 750px) {
+    .species { column-count: 2 }
+  }
   @media screen and (min-width: 900px) {
     div.side-by-side {
       display: grid;
@@ -80,10 +139,10 @@ console.log(pane);
       column-count: 3;
     }
   }
-  .individual-stamps {
-    margin-block-start: 1rem;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+  @media screen and (min-width: 1100px) {
+    .species {
+      column-count: 4;
+    }
   }
+
 </style>

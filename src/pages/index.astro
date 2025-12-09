@@ -1,11 +1,41 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { generateWidths } from "@/utils/imageWidths.js";
-import { type CollectionEntry, getCollection, render } from "astro:content";
+import { getCollection } from "astro:content";
+
+import { Image } from 'astro:assets';
+// 1. Define the glob pattern FOR IMAGES
+// The result is an object of all matching file paths and their import functions.
+const imageImports = import.meta.glob<ImageMetadata>('../assets/stamps/sn*.{jpeg,jpg,png,webp}', { eager: true });
+// 2. Convert the object to an array of metadata
+const images = Object.values(imageImports).map(module => module.default); 
+// The 'images' array now contains the Image Metadata Objects (src, width, height, etc.)
+// for every image found in the 'gallery' folder.
 
 const panes = (await getCollection("panes")).sort(
   (a, b) => a.data.year - b.data.year
 );
+
+// merge in Image objects into panes
+panes.forEach((p) => {
+    let imageNamePattern = 'sn' + p.data.sn + '[\-\.].*.png';
+    let imageNamePartRe = new RegExp(imageNamePattern);
+    // find pane image
+    images.forEach((i) => {
+        if (i.src.match(imageNamePartRe)) {
+            p.data.front_image = i;
+            console.log(i.src)
+        }
+    })
+
+    // Add logging to help debug missing images
+    if (!p.data.front_image) {
+        console.warn(`Warning: No image found for pane ${p.id} (looking for ${imageNamePart})`);
+    }
+})
+
+let widths = generateWidths(600, 200);
+console.log(widths);
 ---
 
 <Layout pageTitle="Stamp Panes in Nature of America Series">
@@ -15,13 +45,20 @@ const panes = (await getCollection("panes")).sort(
         return (
           <a href={`/panes/${p.id}/`}>
             <div class="pane">
-              <img src={`/images/panes/sn${p.data.sn}.png`} /><!-- add alt attribute -->
-<!-- todo: shoudl this be an hx? -->              <div class="title">{p.data.title}</div>
+              <h2 class="title">{p.data.title}</h2>
               <div class="place">{p.data.place}</div>
               <div class="year">{p.data.year}</div>
+              <Image 
+                src={p.data.front_image} 
+                alt={`Stamp pane for ${p.data.title}`}
+                widths={generateWidths(660,200)}
+                format="webp"
+                sizes="(max-width: 699px) calc(90vw - 1rem - 2px), (max-width: 1035px) calc(45vw - 1.5rem - 2px), (max-width: 1401px) calc(30vw - 1rem - 1px - 0.67rem), (max-width: 1750px) calc(22.5vw - 1rem - 1px - 0.75rem), 360px"
+                layout="constrained"
+              />
             </div>
           </a>
-        );
+        )
       })
     }
   </div>
@@ -69,5 +106,7 @@ const panes = (await getCollection("panes")).sort(
   }
   .title {
     font-weight: bold;
+    margin-block-start: 0;
+    margin-block-end: 0;
   }
 </style>

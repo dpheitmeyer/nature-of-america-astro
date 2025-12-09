@@ -11,7 +11,7 @@ export function generateWidths(largest, smallest) {
   const result = [largest];
   let current = largest;
   
-  while (current * (1 - decrement) >= smallest) {
+  while (current >= smallest) {
     current = current * (1 - decrement);
     result.push(Math.ceil(current));
   }

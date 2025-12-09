@@ -1,10 +1,13 @@
 # Final Project
 David's Final Project - "Nature of America Stamp Series".  This site highlights the 12 stamp panes that were part of a series, "Nature of America" from the US Postal Service that ran from 1999 to 2010.  The series highlighted various ecosystems found in the United States.  It was unique in that the individual postage stamps were embedded into each pane.
 
+- Site: [project.dph445.students.cs12.net](https://project.dph445.students.cs12.net/)
+- GitHub: [dpheitmeyer/nature-of-america-astro](https://github.com/dpheitmeyer/nature-of-america-astro/)
+
 ## TODO 
 
 - [ ] add lessons learned
-- [ ] deploy to project subdomain on dreamhost with github actions
+- [x] deploy to project subdomain on dreamhost with github actions
 - [ ] general code cleanup
 - [ ] helper function to get sorted panes collection
 - [ ] basic site tests
@@ -40,8 +43,7 @@ I use `layouts` and `components` for code organization and for DRY principle.
 Data for the panes is part of the "front matter" (see for instance `/src/content/great-plains-prairie.md`).
 
 ### Automated deployment
-TODO: work is in progress
-Github actions will deploy to Dreamhost 'project' subdomain via `rsync`.
+Github action `.github/workflows/deploy.yaml` builds and deploys site on push to main branch using the `burnett01/rsync-deployments@6.0.0` action.  Deploys to dreamhost, and site is viewable at [project.dph445.students.cs12.net](https://project.dph445.students.cs12.net/)
 
 ### Use of JavaScript in browser
 The map of the first issue locations is done through LeafletJS and data from the panes collections.  I use the "npm" way of using leaflet instead of referencing a CDN.  See `src/pages/map.astro`
