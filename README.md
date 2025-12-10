@@ -4,16 +4,25 @@ David's Final Project - "Nature of America Stamp Series".  This site highlights 
 - Site: [project.dph445.students.cs12.net](https://project.dph445.students.cs12.net/)
 - GitHub: [dpheitmeyer/nature-of-america-astro](https://github.com/dpheitmeyer/nature-of-america-astro/)
 
-## TODO 
+## Reflection
 
-- [ ] add lessons learned
-- [x] deploy to project subdomain on dreamhost with github actions
-- [ ] general code cleanup
-- [ ] helper function to get sorted panes collection
-- [ ] basic site tests
-- [ ] lighthouse baseline test and any improvements
-- [ ] should map be Vue?
-- [ ] should responsive images be throughout?
+### What went well
+
+* Use of Astro Collections was helpful for the panes
+* Responsive images are good in the project, though getting it implemented for all of the images took some iterations.  I paid particular attention to the `sizes` attribute and making that match pretty exactly to my CSS.  For example, in `src/pages/index.astro` there is:
+```
+sizes="(max-width: 699px) calc(90vw - 1rem - 2px), (max-width: 1035px) calc(45vw - 1.5rem - 2px), (max-width: 1401px) calc(30vw - 1rem - 1px - 0.67rem), (max-width: 1750px) calc(22.5vw - 1rem - 1px - 0.75rem), 360px"
+```
+* Lighthouse reports on the Home page and Great Plains Prairie page show all scores "green"  and in the 90's.  PDF reports: [Lighthouse - Home Page](./__readme_resources/lighthouse-home.pdf) and [Lighthouse - Great Plains Prairie](./__readme_resource/lighthouse-great-plains-prairie.pdf)
+
+### What could be better
+
+Here's a list of things that I wanted to get to, but will need to wait until the next release:
+
+- basic site tests
+- implement LeafletJS Map with a Vue component instead of Astro.  However, since the map is most of the page, I don't think I would gain that much with Vue and Astro's island architecture.
+- helper function to get sorted panes collection.  I call this once each in `index.astro` and `map.astro` so it isn't huge, but still repeated code.
+- for the single stamps that are part of the panes, for the Great Plains Prairie, I have both the image and description.  For other panes, I only have the images displayed.  I would like to put the titles/descriptions of the single stamps for all the panes.
 
 ## Installation and Running
 

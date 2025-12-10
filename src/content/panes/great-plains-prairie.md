@@ -13,7 +13,7 @@ stamps_annotated:
   - image: npm-2002_2007_657_2z.jpg
     title: 34c Burrowing Owls and American Buffalos single
   - image: npm-2002_2007_657_3z.jpg
-    title: 34c American buffalo, Black-tailed Prairie Dogs and Wild Alfalfa
+    title: 34c American Buffalo, Black-tailed Prairie Dogs and Wild Alfalfa
   - image: npm-2002_2007_657_4z.jpg
     title: 34c Black-tailed Prairie Dogs and American Buffalo
   - image: npm-2002_2007_657_5z.jpg
