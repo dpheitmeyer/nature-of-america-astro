@@ -8,8 +8,8 @@ David's Final Project - "Nature of America Stamp Series".  This site highlights 
 
 ### What went well
 
-* Use of Astro Collections was helpful for the panes
-* Responsive images are good in the project, though getting it implemented for all of the images took some iterations.  I paid particular attention to the `sizes` attribute and making that match pretty exactly to my CSS.  For example, in `src/pages/index.astro` there is:
+* Use of [Astro Collections](https://docs.astro.build/en/guides/content-collections/) was helpful for the panes -- used the panes collection on `index.astro`, `map.astro`, and in the future to improve navigation I will use it in the `components/Navigation.astro` file.
+* Responsive images are good in the project, though getting it implemented for all of the images took some iterations.  I paid particular attention to the `sizes` attribute on both the home page and detail pane pages for all images, and making the "sizes" attribute match pretty exactly to my CSS.  For example, in `src/pages/index.astro` the sizes attribute on the pane image is very specific to match the layout breakpoints:
 ```
 sizes="(max-width: 699px) calc(90vw - 1rem - 2px), (max-width: 1035px) calc(45vw - 1.5rem - 2px), (max-width: 1401px) calc(30vw - 1rem - 1px - 0.67rem), (max-width: 1750px) calc(22.5vw - 1rem - 1px - 0.75rem), 360px"
 ```
@@ -19,10 +19,11 @@ sizes="(max-width: 699px) calc(90vw - 1rem - 2px), (max-width: 1035px) calc(45vw
 
 Here's a list of things that I wanted to get to, but will need to wait until the next release:
 
-- basic site tests
-- implement LeafletJS Map with a Vue component instead of Astro.  However, since the map is most of the page, I don't think I would gain that much with Vue and Astro's island architecture.
-- helper function to get sorted panes collection.  I call this once each in `index.astro` and `map.astro` so it isn't huge, but still repeated code.
-- for the single stamps that are part of the panes, for the Great Plains Prairie, I have both the image and description.  For other panes, I only have the images displayed.  I would like to put the titles/descriptions of the single stamps for all the panes.
+- I'd like to add basic site tests for pages and unique titles would be a good addition
+- I'd like to implement LeafletJS Map with a Vue component instead of Astro.  However, since the map is most of the page, I don't think I would gain that much with Vue and Astro's island architecture.
+- A utility function to get the sorted panes collection might be useful.  Currently, I the sorted panes are retrieved once each in `index.astro` and `map.astro` so it isn't huge, but still repeated code.
+- Data improvements for single stamps.  For the single stamps that are part of the panes, for the Great Plains Prairie, I have both the image and description.  For other panes, I only have the images displayed.  I would like to put the titles/descriptions of the single stamps for all the panes.
+- Navigation improvements for the panes.  Currently the "Stamp Panes" link in the site navigation (Home | Stamp Panes | First Issue Map) goes to the  home page where the panes are all listed. I'd like to implement an "on hover drop down" so it would be possible to select another pane detail page from a pane detail page.
 
 ## Installation and Running
 
